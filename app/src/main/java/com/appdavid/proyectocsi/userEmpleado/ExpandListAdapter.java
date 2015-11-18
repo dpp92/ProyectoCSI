@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import com.appdavid.proyectocsi.R;
@@ -19,7 +19,7 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private ArrayList<ExpandableListParent> groups;
 
-    public ExpandListAdapter(Context applicationContext, ArrayList<ExpandableListParent> customList) {
+    public ExpandListAdapter(Context context, ArrayList<ExpandableListParent> groups) {
 
         this.context = context;
         this.groups = groups;
@@ -66,8 +66,14 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             LayoutInflater inf = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             convertView = inf.inflate(R.layout.layout_empleado_items, null);
         }
-        TextView tv = (TextView) convertView.findViewById(R.id.exp_text);
-        tv.setText(group.getTitle());
+
+        ((CheckedTextView) convertView).setText(group.getTitle());
+        ((CheckedTextView) convertView).setChecked(isExpanded);
+        //TODO CONVERTIR TEXTO A COLOR ((CheckedTextView) convertView).setTextColor(Color.BLACK);
+        /*TextView tv = (TextView) convertView.findViewById(R.id.exp_text);
+        Log.e("Titulo",group.getTitle());
+        tv.setText("Titulo");
+        */
         return convertView;
     }
 

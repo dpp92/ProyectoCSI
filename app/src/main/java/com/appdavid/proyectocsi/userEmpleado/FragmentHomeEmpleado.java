@@ -1,6 +1,5 @@
 package com.appdavid.proyectocsi.userEmpleado;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +66,6 @@ public class FragmentHomeEmpleado extends Fragment {
         task.execute(new String[]{url});
     }
     public class JsonReadTask extends AsyncTask<String,Void,ArrayList<ExpandableListParent>>{
-
         public JsonReadTask() {
             super();
         }
@@ -148,8 +145,5 @@ public class FragmentHomeEmpleado extends Fragment {
         adapter = new ExpandListAdapter(getActivity().getApplicationContext(), customList);
         lv.setAdapter(adapter);
     }
-
-
-
 
 }
