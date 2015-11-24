@@ -19,6 +19,7 @@ import java.io.IOException;
 public class RegistrationIntentService extends IntentService {
 
     private static final String TAG = "RegIntentService";
+
     public static final String SENT_TOKEN_TO_SERVER="sentTokenToServer";
     public static final String GCM_TOKEN = "gcmToken";
     public RegistrationIntentService() {
