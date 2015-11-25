@@ -91,6 +91,7 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View view) {
                 Intent vistaTrabajos = new Intent(context,VistaTrabajos.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                vistaTrabajos.putExtra("id",child.getId());
                 vistaTrabajos.putExtra("tipo",child.getTipo());
                 vistaTrabajos.putExtra("titulo",child.getTitulo());
                 vistaTrabajos.putExtra("contenido",child.getContenido());

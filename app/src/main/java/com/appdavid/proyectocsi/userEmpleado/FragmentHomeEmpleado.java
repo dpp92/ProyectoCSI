@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class FragmentHomeEmpleado extends Fragment {
     Context context;
     HttpURLConnection urlConnection;
-    private BaseExpandableListAdapter adapter;
+    public BaseExpandableListAdapter adapter;
     ExpandableListView lv;
     private String jsonResult;
     ProgressDialog progressDialog;
@@ -55,10 +55,7 @@ public class FragmentHomeEmpleado extends Fragment {
 
         lv = (ExpandableListView)rootView.findViewById(R.id.listViewexp);
         accessWebService();
-
         hijos = new ArrayList<>();
-
-
 
         return rootView;
     }
@@ -86,21 +83,18 @@ public class FragmentHomeEmpleado extends Fragment {
 
             InputStream inputStream= null;
 
+        try{
+            URL myUrl = new URL(strings[0]);
+            urlConnection = (HttpURLConnection)myUrl.openConnection();
+            urlConnection.setDoOutput(true);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setReadTimeout(5 * 1000);
 
-            try{
-                URL myUrl = new URL(strings[0]);
-                urlConnection = (HttpURLConnection)myUrl.openConnection();
-                urlConnection.setDoOutput(true);
-                urlConnection.setRequestMethod("POST");
-                urlConnection.setReadTimeout(5 * 1000);
-
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }try {
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }try {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         urlConnection.getInputStream()));
                 String inputLine;
@@ -123,11 +117,12 @@ public class FragmentHomeEmpleado extends Fragment {
                 JSONArray jsonMainNode = new JSONArray(result);
                 for(int i=0;i<2;i++){
                     JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                    int id     = jsonChildNode.optInt("id");
                     String name = jsonChildNode.optString("tipo");
                     String title = jsonChildNode.optString("titulo");
                     String contenido = jsonChildNode.optString("contenido");
 
-                    hijos.add(new datosHijos(name,title,contenido));
+                    hijos.add(new datosHijos(name,title,contenido,id));
                     customList.add(new ExpandableListParent(name,hijos));
                 }
             } catch (JSONException e) {
@@ -144,15 +139,17 @@ public class FragmentHomeEmpleado extends Fragment {
                 return;
             }
             ListDrawer(customList);
-
         }
-
     }
     public void ListDrawer(ArrayList<ExpandableListParent> customList) {
         adapter = new ExpandListAdapter(getActivity().getApplicationContext(), customList);
-        lv.setAdapter(adapter);
+        lv.setAdapter(adapter);}
+
+    public void ListDrawerUpdate(ArrayList<ExpandableListParent> customList) {
+        adapter = new ExpandListAdapter(getActivity().getApplicationContext(), customList);
+        lv.setAdapter(adapter);}
+
+    public void notifyUpdateTasks(){
+            adapter.notifyDataSetChanged();
+        }
     }
-
-
-
-}

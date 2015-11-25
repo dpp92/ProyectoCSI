@@ -5,7 +5,7 @@ package com.appdavid.proyectocsi.userEmpleado;
  */
 public class datosHijos {
 
-
+    private int id;
     private String tipo;
     private String titulo;
     private String contenido;
@@ -19,7 +19,8 @@ public class datosHijos {
     }
 
 
-    public datosHijos(String tipo,String title, String contenido) {
+    public datosHijos(String tipo,String title, String contenido,int id) {
+        this.id   = id;
         this.tipo = tipo;
         this.titulo = title;
         this.contenido = contenido;
@@ -39,5 +40,13 @@ public class datosHijos {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

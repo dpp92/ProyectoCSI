@@ -7,7 +7,8 @@
         android:title="Editar"
         android:icon="@android:drawable/ic_menu_edit"
         android:orderInCategory="3"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        />
     <item android:id="@+id/save_tasks"
         android:title="Guardar"
         android:icon="@android:drawable/ic_menu_save"

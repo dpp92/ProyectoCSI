@@ -12,4 +12,5 @@
     android:text="Test"
     android:textSize="14sp"
     android:textStyle="bold"
-    android:theme="@style/AppTheme.Black"/>
+    android:theme="@style/AppTheme.Black"
+    android:elevation="1dp"/>
