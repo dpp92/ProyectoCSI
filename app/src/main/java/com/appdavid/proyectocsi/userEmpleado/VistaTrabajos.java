@@ -34,6 +34,9 @@ public class VistaTrabajos extends AppCompatActivity {
         titulo.setText(bundle.getString("titulo"));
         info.setText(bundle.getString("contenido"));
 
+        info.setEnabled(false);
+        info.setTextColor(getResources().getColor(R.color.color));
+
 
 
 
@@ -50,11 +53,15 @@ public class VistaTrabajos extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
+            case R.id.edit_task:
+                info.setEnabled(true);
+                break;
             case R.id.save_tasks:
                 long_info_update = info.length();
                 if (long_info!=long_info_update){
                     actualizarTrabajo(bundle);
                 }
+                break;
 
 
 
