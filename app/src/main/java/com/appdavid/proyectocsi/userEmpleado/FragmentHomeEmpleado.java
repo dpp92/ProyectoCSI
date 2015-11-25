@@ -43,6 +43,7 @@ public class FragmentHomeEmpleado extends Fragment {
     ArrayList<ExpandableListParent> customList = new ArrayList<>();
     //Algo paso
     String url = "http://192.168.57.1/cosas/verCosas.php";
+    private String result="";
 
 
 
@@ -50,16 +51,19 @@ public class FragmentHomeEmpleado extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragmento_empleado_tareas, container, false);
         Log.e("Sesion", "Entramos a FragmentHome");
-
+        context= container.getContext();
 
         lv = (ExpandableListView)rootView.findViewById(R.id.listViewexp);
         accessWebService();
+
         hijos = new ArrayList<>();
-        context= container.getContext();
+
 
 
         return rootView;
     }
+
+
     public void accessWebService() {
 
         JsonReadTask task = new JsonReadTask();
@@ -81,7 +85,7 @@ public class FragmentHomeEmpleado extends Fragment {
         protected ArrayList<ExpandableListParent> doInBackground(String... strings) {
 
             InputStream inputStream= null;
-            String result="";
+
 
             try{
                 URL myUrl = new URL(strings[0]);
@@ -123,7 +127,7 @@ public class FragmentHomeEmpleado extends Fragment {
                     String title = jsonChildNode.optString("titulo");
                     String contenido = jsonChildNode.optString("contenido");
 
-                    hijos.add(new datosHijos(title,contenido));
+                    hijos.add(new datosHijos(name,title,contenido));
                     customList.add(new ExpandableListParent(name,hijos));
                 }
             } catch (JSONException e) {
@@ -148,5 +152,7 @@ public class FragmentHomeEmpleado extends Fragment {
         adapter = new ExpandListAdapter(getActivity().getApplicationContext(), customList);
         lv.setAdapter(adapter);
     }
+
+
 
 }

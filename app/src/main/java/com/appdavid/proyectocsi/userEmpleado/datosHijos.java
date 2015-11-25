@@ -5,10 +5,22 @@ package com.appdavid.proyectocsi.userEmpleado;
  */
 public class datosHijos {
 
+
+    private String tipo;
     private String titulo;
     private String contenido;
 
-    public datosHijos(String title, String contenido) {
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+
+    public datosHijos(String tipo,String title, String contenido) {
+        this.tipo = tipo;
         this.titulo = title;
         this.contenido = contenido;
     }

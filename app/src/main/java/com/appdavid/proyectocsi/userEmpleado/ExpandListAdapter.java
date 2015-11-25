@@ -1,6 +1,7 @@
 package com.appdavid.proyectocsi.userEmpleado;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,13 +80,23 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        datosHijos child = (datosHijos) getChild(groupPosition, childPosition);
+        final datosHijos child = (datosHijos) getChild(groupPosition, childPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.layout_empleado_sub_items, null);
         }
         TextView tv = (TextView) convertView.findViewById(R.id.textView1);
         tv.setText(child.getTitulo());
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent vistaTrabajos = new Intent(context,VistaTrabajos.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                vistaTrabajos.putExtra("tipo",child.getTipo());
+                vistaTrabajos.putExtra("titulo",child.getTitulo());
+                vistaTrabajos.putExtra("contenido",child.getContenido());
+                context.startActivity(vistaTrabajos);
+            }
+        });
         return convertView;
     }
 

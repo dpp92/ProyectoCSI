@@ -37,6 +37,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name="com.appdavid.proyectocsi.userEmpleado.VistaTrabajos">
+            <intent-filter>
+                <action android:name="com.appdavid.proyectocsi.userEmpleado.VistaTrabajos" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".utilities_gcm.MenuScreen" >
+
+        </activity>
 
         <service android:name="com.appdavid.proyectocsi.utilities_gcm.RegistrationIntentService" android:exported="false"/>
         <service
