@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private static String tok="";
-
+    private static final String USER_LOGED ="logueado";
+    SharedPreferences preferences;
     public static final String USER_NAME = "USERNAME";
 
     String username;
@@ -50,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        Boolean checkisLoged = preferences.getBoolean(USER_LOGED,false);
 
         runOnUiThread(new Runnable() {
             @Override
@@ -60,28 +62,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         tok = preferences.getString("gcmToken","");
         Log.e("INFO",tok);
 
-        editTextUserName = (EditText) findViewById(R.id.editText);
-        editTextPassword = (EditText) findViewById(R.id.editText2);
-        btn              = (Button)findViewById(R.id.button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (checkisLoged==false) {
+            setContentView(R.layout.activity_main);
+            editTextUserName = (EditText) findViewById(R.id.editText);
+            editTextPassword = (EditText) findViewById(R.id.editText2);
+            btn              = (Button)findViewById(R.id.button);
 
-                Log.e("Click", "Entraste a este boton");
-                username = editTextUserName.getText().toString();
-                password = editTextPassword.getText().toString();
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                login(username, password,tok);
+                    Log.e("Click", "Entraste a este boton");
+                    username = editTextUserName.getText().toString();
+                    password = editTextPassword.getText().toString();
 
-            }
-        });
+                    login(username, password, tok);
 
-
+                }
+            });
+        }else {
+            iniciarActividad();
+        }
     }
 
 
@@ -178,8 +183,9 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Toast.makeText(getBaseContext(), "Logueado", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent("com.appdavid.proyectocsi.MainEmpleado");
-                            startActivity(intent);
+
+                            preferences.edit().putBoolean(USER_LOGED, true).apply();
+                            iniciarActividad();
                         }
                     });
 
@@ -193,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         login_task loginTask = new login_task();
-        loginTask.execute(username, password,token);
+        loginTask.execute(username, password, token);
     }
 
 
@@ -259,5 +265,10 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void iniciarActividad(){
+        Intent intent = new Intent("com.appdavid.proyectocsi.MainEmpleado");
+        startActivity(intent);
     }
 }
