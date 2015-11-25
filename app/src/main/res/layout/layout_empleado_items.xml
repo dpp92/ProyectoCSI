@@ -11,4 +11,5 @@
     android:paddingTop="8dp"
     android:text="Test"
     android:textSize="14sp"
-    android:textStyle="bold" />
+    android:textStyle="bold"
+    android:theme="@style/AppTheme.Black"/>

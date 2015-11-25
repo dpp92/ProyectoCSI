@@ -65,6 +65,8 @@ public class FragmentHomeEmpleado extends Fragment {
         JsonReadTask task = new JsonReadTask();
         task.execute(new String[]{url});
     }
+
+
     public class JsonReadTask extends AsyncTask<String,Void,ArrayList<ExpandableListParent>>{
         public JsonReadTask() {
             super();
