@@ -49,7 +49,7 @@ public class FragmentHomeEmpleado extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragmento_empleado_tareas, container, false);
+        View rootView = inflater.inflate(R.layout.empleado_fragmento_lista_expand_tareas, container, false);
         Log.e("Sesion", "Entramos a FragmentHome");
         context= container.getContext();
 

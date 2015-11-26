@@ -25,7 +25,7 @@ public class LogedActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_usuario);
+        setContentView(R.layout.cliente_layout_usuario);
         Log.e("Sesion","Entramos a LogedActivity");
 
         // Creamos una lista de Fragments

@@ -2,12 +2,9 @@ package com.appdavid.proyectocsi;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 
 import com.appdavid.proyectocsi.userEmpleado.FragmentHomeEmpleado;
 import com.appdavid.proyectocsi.userEmpleado.adapFragmentEmpleado;
@@ -27,7 +24,7 @@ public class MainEmpleado extends AppCompatActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_empleado);
+        setContentView(R.layout.empleado_fragment_layout);
         Log.e("Sesion", "Entramos a MainEmpleado");
 
         //Creamos la lista

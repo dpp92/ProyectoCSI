@@ -65,7 +65,7 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
         ExpandableListParent group = (ExpandableListParent) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater inf = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            convertView = inf.inflate(R.layout.layout_empleado_items, null);
+            convertView = inf.inflate(R.layout.empleado_layout_items, null);
         }
 
         ((CheckedTextView) convertView).setText(group.getTitle());
@@ -83,7 +83,7 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
         final datosHijos child = (datosHijos) getChild(groupPosition, childPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.layout_empleado_sub_items, null);
+            convertView = infalInflater.inflate(R.layout.empleado_layout_sub_items, null);
         }
         TextView tv = (TextView) convertView.findViewById(R.id.textView1);
         tv.setText(child.getTitulo());

@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -165,8 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
                     in.close();
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -268,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void iniciarActividad(){
-        Intent intent = new Intent("com.appdavid.proyectocsi.MainEmpleado");
+        Intent intent = new Intent("com.appdavid.proyectocsi.LogedActivity");
         startActivity(intent);
     }
 }

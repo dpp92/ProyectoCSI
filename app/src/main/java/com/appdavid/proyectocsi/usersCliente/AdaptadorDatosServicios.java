@@ -42,6 +42,8 @@ public class AdaptadorDatosServicios extends ArrayAdapter<DatosServicios> {
 
         TextView textName = (TextView) itemView.findViewById(R.id.name);
 
+        
+
         textName.setText(serviciosArrayList.get(position).getName());
 
         TextView textPrice = (TextView) itemView.findViewById(R.id.description);

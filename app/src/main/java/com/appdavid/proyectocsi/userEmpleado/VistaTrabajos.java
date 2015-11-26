@@ -51,7 +51,7 @@ public class VistaTrabajos extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vista_tareas);
+        setContentView(R.layout.empleado_activity_vista_tareas);
 
         pDialog = (ProgressBar) findViewById(R.id.progressBar);
         finish = (CheckBox)findViewById(R.id.checkBox);
@@ -66,9 +66,6 @@ public class VistaTrabajos extends AppCompatActivity {
         info.setText(bundle.getString("contenido"));
 
         info.setEnabled(false);
-        info.setTextColor(getResources().getColor(R.color.color));
-
-
 
 
         long_info=info.length();
@@ -101,7 +98,7 @@ public class VistaTrabajos extends AppCompatActivity {
 
     private void actualizarTrabajo(Bundle bundle) {
 
-        String msg_cambiado="";
+        String msg_cambiado;
         String tipo_task = bundle.getString("tipo");
         String titulo_task = bundle.getString("titulo");
         int id = bundle.getInt("id");

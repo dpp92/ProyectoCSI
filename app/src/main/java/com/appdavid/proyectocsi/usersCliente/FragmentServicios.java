@@ -40,7 +40,7 @@ public class FragmentServicios extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragmentos_servicios,container,false);
+        View rootView = inflater.inflate(R.layout.cliente_fragmentos_servicios,container,false);
 
 
         context = container.getContext();
@@ -49,7 +49,7 @@ public class FragmentServicios extends Fragment {
         datosServicioses = new ArrayList<DatosServicios>();
 
         listServicios = (ListView)rootView.findViewById(R.id.servicios_lista);
-        adaptadorDatosServicios = new AdaptadorDatosServicios(context,R.layout.lista_servicios,
+        adaptadorDatosServicios = new AdaptadorDatosServicios(context,R.layout.cliente_lista_servicios,
                 R.id.name,datosServicioses);
         listServicios.setAdapter(adaptadorDatosServicios);
 

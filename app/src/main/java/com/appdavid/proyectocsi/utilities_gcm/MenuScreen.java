@@ -7,7 +7,6 @@ import android.widget.TextView;
 import com.appdavid.proyectocsi.R;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -20,7 +19,7 @@ public class MenuScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_notifications);
 
-        TextView et1 = (TextView)findViewById(R.id.Hola);
+        TextView et1 = (TextView)findViewById(R.id.mensajes);
 
         String []archivos=fileList();
         if (existe(archivos,"msgCSI.txt")){
@@ -36,8 +35,6 @@ public class MenuScreen extends AppCompatActivity {
                 br.close();
                 archivo.close();
                 et1.append("\n "+ todo);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }

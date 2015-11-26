@@ -40,14 +40,14 @@ public class FragmentProductos extends Fragment {
     ArrayList<DatosProductos> datosProductoses;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragmento_productos,container,false);
+        View rootView = inflater.inflate(R.layout.cliente_fragmento_productos,container,false);
         context = container.getContext();
 
 
         datosProductoses = new ArrayList<DatosProductos>();
 
         listProductos = (ListView)rootView.findViewById(R.id.productos_lista);
-        adaptadorDatosProductos = new AdaptadorDatosProductos(context,R.layout.lista_productos,
+        adaptadorDatosProductos = new AdaptadorDatosProductos(context,R.layout.cliente_lista_productos,
                 R.id.name,datosProductoses);
         listProductos.setAdapter(adaptadorDatosProductos);
 
