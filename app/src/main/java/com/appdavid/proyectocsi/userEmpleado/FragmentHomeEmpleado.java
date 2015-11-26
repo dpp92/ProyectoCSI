@@ -145,11 +145,5 @@ public class FragmentHomeEmpleado extends Fragment {
         adapter = new ExpandListAdapter(getActivity().getApplicationContext(), customList);
         lv.setAdapter(adapter);}
 
-    public void ListDrawerUpdate(ArrayList<ExpandableListParent> customList) {
-        adapter = new ExpandListAdapter(getActivity().getApplicationContext(), customList);
-        lv.setAdapter(adapter);}
 
-    public void notifyUpdateTasks(){
-            adapter.notifyDataSetChanged();
-        }
     }
