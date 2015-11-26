@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/admintextViewsub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@android:drawable/alert_light_frame"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:text="hello_world"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#000">
+    </TextView>
+    <CheckBox android:id="@+id/adminCheckbox" android:focusable="false"
+        android:layout_alignParentRight="true" android:freezesText="false"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="5px" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black" />
+
+
+
+
+
+</RelativeLayout>
+</LinearLayout>
