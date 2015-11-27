@@ -113,8 +113,9 @@ public class FragmentHomeEmpleado extends Fragment {
                 Log.e("ERROR", "Error converting result " + e.toString());
             }
             try{
+                //TODO "Revisar porque hijos aparecen en los dos tipos de grupo
                 JSONArray jsonMainNode = new JSONArray(result);
-                for(int i=0;i<jsonMainNode.length();i++){
+                for(int i=0;i<2;i++){
                     JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
                     String name = jsonChildNode.optString("tipo");
                     String title = jsonChildNode.optString("titulo");

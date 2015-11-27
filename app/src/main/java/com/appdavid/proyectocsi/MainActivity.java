@@ -39,19 +39,30 @@ public class MainActivity extends AppCompatActivity {
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
     private BroadcastReceiver mRegistrationBroadcastReceiver;
-
-
+    private static String tok="";
 
     public static final String USER_NAME = "USERNAME";
 
     String username;
     String password;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        register_GCM();
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                register_GCM();
+            }
+        });
+
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        tok = preferences.getString("gcmToken","");
+        Log.e("INFO",tok);
 
         editTextUserName = (EditText) findViewById(R.id.editText);
         editTextPassword = (EditText) findViewById(R.id.editText2);
@@ -60,11 +71,12 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Log.e("Click", "Entraste a este boton");
                 username = editTextUserName.getText().toString();
                 password = editTextPassword.getText().toString();
 
-                login(username, password);
+                login(username, password,tok);
 
             }
         });
@@ -73,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void login(String username, String password) {
+    private void login(String username, String password,String token) {
         Log.e("login", "Entraste");
 
         class login_task extends AsyncTask{
@@ -87,13 +99,14 @@ public class MainActivity extends AppCompatActivity {
                 String dir = "http://192.168.57.1/cosas/config.php";
                 String nombre = (String) params[0];
                 String contra = (String)params[1];
+                String tokengcm = (String)params[2];
+
 
                 try {
+
                     URL myUrl = new URL(dir);
                     HttpURLConnection urlConnection = (HttpURLConnection)myUrl.openConnection();
                     urlConnection.addRequestProperty("User-Agent",userAgent);
-                    String nombreEnviar = URLEncoder.encode(nombre,"UTF-8");
-                    String contraEnviar = URLEncoder.encode(contra,"UTF-8");
                     //para establecer conexion de escritura
                     urlConnection.setDoOutput(true);
                     //indicamos el tipo de request
@@ -103,8 +116,10 @@ public class MainActivity extends AppCompatActivity {
                     urlConnection.setReadTimeout(5 * 1000);
 
                     HashMap<String,String> datos = new HashMap<>();
-                    datos.put("nombre", (String) params[0]);
-                    datos.put("contraseña", (String) params[1]);
+                    datos.put("nombre", nombre);
+                    datos.put("contraseña",contra);
+                    datos.put("token",tokengcm);
+
                     Log.e("INFO datos", String.valueOf(datos));
                     StringBuilder cadena = new StringBuilder();
                     boolean first = true;
@@ -177,34 +192,36 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-
-
         login_task loginTask = new login_task();
-        loginTask.execute(username, password);
+        loginTask.execute(username, password,token);
     }
 
 
 
     private void register_GCM(){
-        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                SharedPreferences sharedPreferences =
-                        PreferenceManager.getDefaultSharedPreferences(context);
-                boolean sentToken = sharedPreferences
-                        .getBoolean(RegistrationIntentService.SENT_TOKEN_TO_SERVER, false);
-                if (sentToken) {
-                    Log.e("Succes", String.valueOf(R.string.gcm_send_message));
-                } else {
-                    Log.e("No Succes", String.valueOf(R.string.token_error_message));
-                }
-            }
-        };
 
+               mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+                   @Override
+                   public void onReceive(Context context, Intent intent) {
+                       Log.e("regiser_GCM", "Nos estamos registrando");
+                       SharedPreferences sharedPreferences =
+                               PreferenceManager.getDefaultSharedPreferences(context);
+
+                       boolean sentToken = sharedPreferences
+                               .getBoolean(RegistrationIntentService.SENT_TOKEN_TO_SERVER, false);
+
+                       if (sentToken) {
+                           Log.e("Succes", String.valueOf(R.string.gcm_send_message));
+                       } else {
+                           Log.e("No Succes", String.valueOf(R.string.token_error_message));
+                       }
+                   }
+               };
 
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
+            Log.e("regiser_GCM","Nos estamos registrando");
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
         }

@@ -20,8 +20,9 @@ public class RegistrationIntentService extends IntentService {
 
     private static final String TAG = "RegIntentService";
 
-    public static final String SENT_TOKEN_TO_SERVER="sentTokenToServer";
+    public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String GCM_TOKEN = "gcmToken";
+
     public RegistrationIntentService() {
         super(TAG);
     }
@@ -31,15 +32,9 @@ public class RegistrationIntentService extends IntentService {
         //Hace un llamado al intent para pedir un token
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-
-
-        try{
-
+        try {
             InstanceID instanceID = InstanceID.getInstance(this);
-            String senderID=getResources().getString(R.string.gcm_defaultSenderID);
-
-
+            String senderID = getResources().getString(R.string.gcm_defaultSenderID);
             String token = instanceID.getToken(senderID, GoogleCloudMessaging.INSTANCE_ID_SCOPE);
             Log.d(TAG, "GCM Registration Token: " + token);
             sendRegistrationToServer(token);
@@ -57,13 +52,8 @@ public class RegistrationIntentService extends IntentService {
     }
 
 
-    private void sendRegistrationToServer(String token){
-
-
+    private void sendRegistrationToServer(String token) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.edit().putBoolean(SENT_TOKEN_TO_SERVER, true).apply();
-
     }
-
-
 }
