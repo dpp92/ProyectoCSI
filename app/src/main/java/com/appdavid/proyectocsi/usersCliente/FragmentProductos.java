@@ -2,6 +2,7 @@ package com.appdavid.proyectocsi.usersCliente;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,6 +35,7 @@ public class FragmentProductos extends Fragment {
     Context context;
 
     HttpURLConnection httpURLConnection;
+    private final String PRODUCTOS="ERROR PRODUCTOS";
     ProgressDialog progressDialog;
     AdaptadorDatosProductos adaptadorDatosProductos;
     ListView listProductos;
@@ -56,6 +58,13 @@ public class FragmentProductos extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 DatosProductos elegido = (DatosProductos)parent.getItemAtPosition(position);
+
+                //Creamos un paquete para guardar los datos a enviar
+                Bundle datosProductoSeleccionado = new Bundle();
+                datosProductoSeleccionado.putString("nombreProductoSeleccionado",elegido.getName());
+                datosProductoSeleccionado.putString("descripcionProductoSeleccionado",elegido.getDescription());
+                //Creamos intent para abrir la nueva clase
+                Intent i = new Intent(getContext(), HacerPedido.class);
 
                 CharSequence texto = "Seleccionado: " + elegido.getDescription();
                 Toast toast = Toast.makeText(context, texto, Toast.LENGTH_LONG);
@@ -106,7 +115,7 @@ public class FragmentProductos extends Fragment {
             String result="";
             try {
 
-                URL url = new URL("http://192.168.1.101/cosas/verregistros_productos.php");
+                URL url = new URL("http://172.16.60.1/cosas/verregistros.php");
                 httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -119,7 +128,7 @@ public class FragmentProductos extends Fragment {
 
                     progressDialog.dismiss(); //close the dialog if error occurs
 
-                    Log.e("ERROR", e.getMessage());
+                    Log.e(PRODUCTOS, e.getMessage());
 
                 }
             }
@@ -136,7 +145,7 @@ public class FragmentProductos extends Fragment {
                 in.close();
                 result = sb.toString();
             } catch (IOException e) {
-                Log.e("ERROR", "Error converting result " + e.toString());
+                Log.e(PRODUCTOS, "Error converting result " + e.toString());
             }
 
             //parsear json
@@ -149,7 +158,7 @@ public class FragmentProductos extends Fragment {
                     JSONObject json_data =jsonArray.getJSONObject(i);
                     DatosProductos datosProductos = new DatosProductos();
 
-                    datosProductos.setThumbnailResource(json_data.getString("das"));
+                    //datosProductos.setThumbnailResource(json_data.getString("name"));
                     datosProductos.setName(json_data.getString("name"));
                     datosProductos.setDescription(json_data.getString("description"));
                     datosProductoses.add(datosProductos);
@@ -157,7 +166,7 @@ public class FragmentProductos extends Fragment {
                 }
 
             }catch (Exception e){
-                Log.e("ERROR", "Error pasting data "+e.toString());
+                Log.e(PRODUCTOS, "Error pasting data "+e.toString());
             }
 
             return null;

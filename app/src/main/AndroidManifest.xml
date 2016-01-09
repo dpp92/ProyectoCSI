@@ -47,6 +47,18 @@
         <activity android:name=".utilities_gcm.MenuScreen" >
 
         </activity>
+        <activity android:name="com.appdavid.proyectocsi.MainAdmin" >
+            <intent-filter>
+                <action android:name="com.appdavid.proyectocsi.MainAdmin"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".userAdmin.Crear_Servicio">
+
+        </activity>
+        <activity android:name=".userAdmin.CrearProducto">
+
+        </activity>
 
         <service android:name="com.appdavid.proyectocsi.utilities_gcm.RegistrationIntentService" android:exported="false"/>
         <service

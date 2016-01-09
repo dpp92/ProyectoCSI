@@ -7,24 +7,26 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.List;
 
 /**
- * Created by dpp on 26/11/15.
+ * Created by dpp on 11/12/15.
  */
-public class adapFragmentAdmin extends FragmentStatePagerAdapter {
+public class adapFragmentAdmin  extends FragmentStatePagerAdapter {
 
-    private List<Fragment> fragmentList;
+    private List<Fragment> fragments;
 
-    public adapFragmentAdmin(FragmentManager fm,List<Fragment>fragmentList) {
+    public adapFragmentAdmin (FragmentManager fm,List<Fragment>fragments) {
         super(fm);
-        this.fragmentList = fragmentList;
+        this.fragments = fragments;
     }
+
 
     @Override
     public Fragment getItem(int position) {
-        return null;
+        return fragments.get(position);
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return fragments.size();
     }
 }
+

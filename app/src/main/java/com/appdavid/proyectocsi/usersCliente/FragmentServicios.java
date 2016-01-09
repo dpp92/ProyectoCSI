@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class FragmentServicios extends Fragment {
 
     Context context;
-
+    private final String SERVICIOS="ERROR SERVICIOS";
     HttpURLConnection httpURLConnection;
     ProgressDialog progressDialog;
     AdaptadorDatosServicios adaptadorDatosServicios;
@@ -94,7 +94,7 @@ public class FragmentServicios extends Fragment {
             String result="";
             try {
 
-                URL url = new URL("http://192.168.1.101/cosas/verregistros.php");
+                URL url = new URL("http://172.16.60.1/cosas/verregistros.php");
                 httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -107,7 +107,7 @@ public class FragmentServicios extends Fragment {
 
                     progressDialog.dismiss(); //close the dialog if error occurs
 
-                    Log.e("ERROR", e.getMessage());
+                    Log.e(SERVICIOS, e.getMessage());
 
                 }
             }
@@ -124,7 +124,7 @@ public class FragmentServicios extends Fragment {
                 in.close();
                 result = sb.toString();
             } catch (IOException e) {
-                Log.e("ERROR", "Error converting result " + e.toString());
+                Log.e(SERVICIOS, "Error converting result " + e.toString());
             }
 
             //parsear json
@@ -144,7 +144,7 @@ public class FragmentServicios extends Fragment {
                 }
 
             }catch (Exception e){
-                Log.e("ERROR", "Error pasting data "+e.toString());
+                Log.e(SERVICIOS, "Error pasting data "+e.toString());
             }
 
             return null;

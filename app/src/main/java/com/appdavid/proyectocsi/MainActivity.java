@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     username = editTextUserName.getText().toString();
                     password = editTextPassword.getText().toString();
 
+
                     login(username, password, tok);
 
                 }
@@ -95,13 +96,13 @@ public class MainActivity extends AppCompatActivity {
 
         class login_task extends AsyncTask{
 
-            String userAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:26.0) Gecko/20100101 Firefox/26.0";
+            String userAgent = "user_platform:movil";
             String response;
 
 
             @Override
             protected Object doInBackground(Object[] params) {
-                String dir = "http://192.168.57.1/cosas/config.php";
+                String dir = "http://172.16.60.1/cosas/config.php";
                 String nombre = (String) params[0];
                 String contra = (String)params[1];
                 String tokengcm = (String)params[2];
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
                     URL myUrl = new URL(dir);
                     HttpURLConnection urlConnection = (HttpURLConnection)myUrl.openConnection();
-                    urlConnection.addRequestProperty("User-Agent",userAgent);
+
                     //para establecer conexion de escritura
                     urlConnection.setDoOutput(true);
                     //indicamos el tipo de request
@@ -268,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void iniciarActividad(){
-        Intent intent = new Intent("com.appdavid.proyectocsi.MainAdmin");
+        Intent intent = new Intent("com.appdavid.proyectocsi.LogedActivity");
         startActivity(intent);
     }
 }

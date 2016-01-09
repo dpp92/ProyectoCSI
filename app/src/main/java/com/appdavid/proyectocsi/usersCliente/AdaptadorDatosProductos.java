@@ -43,7 +43,7 @@ public class AdaptadorDatosProductos extends ArrayAdapter<DatosProductos> {
 
         ImageView imageThumbnail = (ImageView)itemView.findViewById(R.id.image);
 
-        imageThumbnail.setImageResource(Integer.parseInt(productos.ThumbnailResource));
+//        imageThumbnail.setImageResource(Integer.parseInt(productos.ThumbnailResource));
 
         TextView textName = (TextView) itemView.findViewById(R.id.nameProductos);
 
